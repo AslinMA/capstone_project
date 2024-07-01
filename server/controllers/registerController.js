@@ -54,7 +54,7 @@ exports.registerUser = (req, res) => {
       const hashedPassword = await bcrypt.hash(formData.password, 10);
 
       const sql = `INSERT INTO estate_register 
-      (full_name, email, land_owner_name, location, land_r_no, land_r_copy, user_id, user_id_front, user_id_back, owner_trance_letter, lxb_no, user_name, password, status, estate_name, route) 
+      (full_name, email, land_owner_name, location, land_r_no, land_r_copy, user_id, user_id_front, user_id_back, owner_trance_letter, lxb_no, user_name, password, status, estate_name, root) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
       const values = [
@@ -80,6 +80,7 @@ exports.registerUser = (req, res) => {
       console.log('Query Values:', values);
 
       db.query(sql, values, (error, results) => {
+        console.log("SQL Query/////");
         if (error) {
           console.error('Database query error:', error);
           return res.status(500).json({ error: 'Database query error' });

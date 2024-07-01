@@ -9,7 +9,6 @@ const chamicalAddRoutes = require('./routes/chamicalAddRoutes');
 const tappingRouts = require('./routes/tappingDetailsroutes');
 const FillingbillRoutes = require('./routes/FillingbillRoutes');
 const weightUpdateRoutes = require('./routes/weightUpdateRoutes');
- // Add the new routes
 
 const app = express();
 
@@ -21,14 +20,20 @@ app.use(cookieParser());
 
 // Session middleware configuration
 app.use(session({
-  secret: 'your_secret_key_here', // Replace with a secret key for session management
+  secret: 'your_secret_key_here',
   resave: false,
   saveUninitialized: false,
   cookie: {
     secure: false, // Set to true if using HTTPS
-    maxAge: 1000 * 60 * 60 * 24, // 1 day in milliseconds
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
   },
 }));
+
+// Logging middleware to check session data
+app.use((req, res, next) => {
+  console.log('Session data:', req.session);
+  next();
+});
 
 // Serve static files
 app.use('/uploads', express.static('uploads'));
@@ -39,13 +44,8 @@ app.use('/api', loginRoutes);
 app.use('/api', chamicalAddRoutes);
 app.use('/', tappingRouts);
 app.use('/api', FillingbillRoutes);
-app.use('/api', weightUpdateRoutes); // Use the new routes
 
-// Logging middleware to check session data
-app.use((req, res, next) => {
-  console.log('Session data:', req.session);
-  next();
-});
+app.use('/api', weightUpdateRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5001;
