@@ -17,7 +17,7 @@ const db = mysql.createConnection({
 //   waitForConnections: true,
 //   connectionLimit: 10,
 //   queueLimit: 0
-// });
+// })
 
 db.connect((err) => {
   if (err) throw err;

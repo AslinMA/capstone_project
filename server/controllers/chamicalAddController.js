@@ -10,11 +10,9 @@ exports.chamicalAdd = (req, res) => {
  
   console.log("lxb_no retrieved from session:", lxb_no);
 
-  if (!lxb_no) {
-    return res.status(400).send({ error: 'lxb_no is missing from session' });
-  }
-
-  const query = `
+// var lxb_no = 'lxb002';
+  if (lxb_no !='null') {
+    const query = `
     INSERT INTO daily_tapping_update (lxb_no, date, today_tapping, today_nh3_addition, today_tmtd_addition) 
     VALUES (?, ?, ?, ?, ?)
   `;
@@ -22,9 +20,16 @@ exports.chamicalAdd = (req, res) => {
   db.query(query, [lxb_no, date, liters, ammonia, tmtd], (err, result) => {
     if (err) {
       console.error('Error inserting data:', err);
+      alert('Error inserting data');
       return res.status(500).send({ error: 'Database error' });
     }
     console.log('Data inserted:', result);
     res.status(200).send({ success: 'Data inserted successfully' });
   });
+  }
+  else{
+     return res.status(400).json({ error: 'your not registered yet still dont you have a registration number' });
+  }
+
+  
 };
