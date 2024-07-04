@@ -9,6 +9,7 @@ const chamicalAddRoutes = require('./routes/chamicalAddRoutes');
 const tappingRouts = require('./routes/tappingDetailsroutes');
 const FillingbillRoutes = require('./routes/FillingbillRoutes');
 const weightUpdateRoutes = require('./routes/weightUpdateRoutes');
+const billRoutes=require('./routes/billRoutes');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 
 // Session middleware configuration
 app.use(session({
@@ -44,9 +46,8 @@ app.use('/api', loginRoutes);
 app.use('/api', chamicalAddRoutes);
 app.use('/', tappingRouts);
 app.use('/api', FillingbillRoutes);
-
 app.use('/api', weightUpdateRoutes);
-
+app.use('/',billRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5001;
