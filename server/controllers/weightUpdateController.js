@@ -8,7 +8,7 @@ exports.updateWeightDetails = (req, res) => {
   }
 
   const query = `
-    INSERT INTO weight_updates (date, route, vehicle_number, tank_number, weight, drc, ammonia, vfa)
+    INSERT INTO weight_updates (date, route, vehicle_number, tank_number, weight, drc, ammoniaQality, vfa)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `;
 

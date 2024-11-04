@@ -14,10 +14,12 @@ const billRoutes=require('./routes/billRoutes');
 const app = express();
 
 // Middleware
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 
 
 // Session middleware configuration
@@ -37,6 +39,7 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Serve static files
 app.use('/uploads', express.static('uploads'));
 
@@ -49,9 +52,11 @@ app.use('/api', FillingbillRoutes);
 app.use('/api', weightUpdateRoutes);
 app.use('/',billRoutes);
 
+
 // Start server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
+
 
 console.log(`Server running on port ${PORT}`);
 });

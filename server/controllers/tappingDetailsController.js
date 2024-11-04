@@ -29,9 +29,25 @@ exports.tappingDetailsShow = (req, res) => {
     });
   }
   else {
-    return res.status(400).json({ error: 'you have no lxb or your not approved customer' });
     console.log("you have no lxb or your not approved customer");
+    return res.status(400).json({ error: 'you have no lxb or your not approved customer' });
+    
   }
 
  
 };
+exports.deleteTappingDetail = (req, res) => {
+  const { id } = req.params;
+
+  const query = "DELETE FROM daily_tapping_update WHERE id = ?";
+  const params = [id];
+
+  db.query(query, params, (err, results) => {
+    if (err) {
+      console.error("Database query error:", err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json({ message: 'Record deleted successfully' });
+  });
+};
+
